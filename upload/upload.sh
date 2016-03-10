@@ -3,18 +3,7 @@
 #
 # Copyright (C) 2016 Automatique by regalstreak
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-# http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
+
 
 # This file will upload the ROM to your ftp mirror automatically
 # Depends on: * The Declarations
@@ -22,7 +11,7 @@
 # Store host in hosts.inf
 # Store username in users.inf
 # Store password in pass.inf
-
+# This file is automatique/upload/upload.sh
 
 
 # Clear terminal history
@@ -33,13 +22,14 @@ echo -e "Automatique by regalstreak"
 echo -e ""
 echo -e ""
 
-# Declarations
-DIR=								# Directory where the builds are stored	
-ROM=								# ROM Directory from $DIR
-HOST=` cat host.inf `						# FTP Host
-USER=` cat user.inf `						# Username
-PASS=` cat pass.inf `						# Password
-ZIP=								# ROM zip name
+# Declarations			# Explanation				 	# Example
+
+DIR=				# Directory where the builds are stored		# /home/regalstreak/android/oneplus2/Builds
+FLOC=				# Directory where to store on FTP server	# /oneplus2/Custom/ROMs/Resurrection-Remix-6.x/Full
+HOST=` cat host.inf `		# FTP Host					# basketbuild.com (in host.inf)
+USER=` cat user.inf `		# Username				 	# regalstreak (in user.inf)
+PASS=` cat pass.inf `		# Password				 	# (Your Password) (in pass.inf)
+ZIP=				# ROM zip name				 	# ResurrectionRemix-M-*-oneplus2.zip (Note: Substitute changing stuff (date, version number, etc) with * like I have done)
 
 
 # Upload it all
@@ -49,7 +39,7 @@ echo -e "Connecting..."
 
 ftp -inv $HOST << EOF
 user $USER $PASS
-cd $ROM
+cd $FLOC
 put $ZIP
 bye
 EOF
